@@ -15,9 +15,14 @@
 linux_palette <- function(palette = "main", reverse = FALSE, ...) {
   pal <- linuxcolors_palettes[[palette]]
   if (is.null(pal)) {
-    stop("Palette not found. Choose from: ", paste(names(linuxcolors_palettes), collapse = ", "))
+    stop(
+      "Palette not found. Choose from: ",
+      paste(names(linuxcolors_palettes), collapse = ", ")
+    )
   }
-  if (reverse) pal <- rev(pal)
+  if (reverse) {
+    pal <- rev(pal)
+  }
   grDevices::colorRampPalette(pal, ...)
 }
 
@@ -39,11 +44,21 @@ linux_palette <- function(palette = "main", reverse = FALSE, ...) {
 #' ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
 #'   geom_point(size = 3) +
 #'   scale_color_linux("main")
-scale_color_linux <- function(palette = "main", discrete = TRUE, reverse = FALSE, ...) {
+scale_color_linux <- function(
+  palette = "main",
+  discrete = TRUE,
+  reverse = FALSE,
+  ...
+) {
   pal <- linux_palette(palette = palette, reverse = reverse)
 
   if (discrete) {
-    ggplot2::discrete_scale("colour", paste0("linux_", palette), palette = pal, ...)
+    ggplot2::discrete_scale(
+      "colour",
+      paste0("linux_", palette),
+      palette = pal,
+      ...
+    )
   } else {
     ggplot2::scale_color_gradientn(colours = pal(256), ...)
   }
@@ -67,11 +82,21 @@ scale_color_linux <- function(palette = "main", discrete = TRUE, reverse = FALSE
 #' ggplot(mtcars, aes(factor(cyl), fill = factor(vs))) +
 #'   geom_bar() +
 #'   scale_fill_linux("additional")
-scale_fill_linux <- function(palette = "main", discrete = TRUE, reverse = FALSE, ...) {
+scale_fill_linux <- function(
+  palette = "main",
+  discrete = TRUE,
+  reverse = FALSE,
+  ...
+) {
   pal <- linux_palette(palette = palette, reverse = reverse)
 
   if (discrete) {
-    ggplot2::discrete_scale("fill", paste0("linux_", palette), palette = pal, ...)
+    ggplot2::discrete_scale(
+      "fill",
+      paste0("linux_", palette),
+      palette = pal,
+      ...
+    )
   } else {
     ggplot2::scale_fill_gradientn(colours = pal(256), ...)
   }
