@@ -13,6 +13,55 @@ format: gfm
 pak::pak("ikashnitsky/linuxcolors")
 ```
 
+## Palettes
+
+```{r}
+library(linuxcolors)
+library(tidyverse)
+library(prismatic)
+library(colorspace)
+
+# main
+linuxcolors_palettes$main |>color() |> plot()
+```
+
+```{r}
+# additional
+linuxcolors_palettes$additional |> color() |> plot()
+```
+
+```{r}      
+# larger
+linuxcolors_palettes$larger |> color() |> plot()
+```
+
+```{r}
+# max_paired
+linuxcolors_palettes$max_paired |> color() |> plot()
+``` 
+
+```{r}
+# diverging
+linuxcolors_palettes$diverging |> color() |> plot()
+```
+
+```{r}
+# sequential_green
+linuxcolors_palettes$sequential_green |> color() |> plot()
+```
+
+```{r}
+# colorblind_strict
+linuxcolors_palettes$colorblind_strict |> color() |> plot()
+linuxcolors_palettes$colorblind_strict |> color() |> check_color_blindness()
+```
+
+```{r}
+# neon
+linuxcolors_palettes$neon |> color() |> plot()
+```
+
+
 ## Usage
 
 ```{r, eval=FALSE}

@@ -11,6 +11,98 @@
 pak::pak("ikashnitsky/linuxcolors")
 ```
 
+## Palettes
+
+``` r
+library(linuxcolors)
+library(tidyverse)
+```
+
+    ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+    ✔ dplyr     1.2.0     ✔ readr     2.2.0
+    ✔ forcats   1.0.1     ✔ stringr   1.6.0
+    ✔ ggplot2   4.0.2     ✔ tibble    3.3.1
+    ✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+    ✔ purrr     1.2.1     
+    ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+    ✖ dplyr::filter() masks stats::filter()
+    ✖ dplyr::lag()    masks stats::lag()
+    ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+``` r
+library(prismatic)
+library(colorspace)
+```
+
+
+    Attaching package: 'colorspace'
+
+    The following object is masked from 'package:prismatic':
+
+        contrast_ratio
+
+``` r
+# main
+linuxcolors_palettes$main |>color() |> plot()
+```
+
+![](README_files/figure-commonmark/unnamed-chunk-2-1.png)
+
+``` r
+# additional
+linuxcolors_palettes$additional |> color() |> plot()
+```
+
+![](README_files/figure-commonmark/unnamed-chunk-3-1.png)
+
+``` r
+# larger
+linuxcolors_palettes$larger |> color() |> plot()
+```
+
+![](README_files/figure-commonmark/unnamed-chunk-4-1.png)
+
+``` r
+# max_paired
+linuxcolors_palettes$max_paired |> color() |> plot()
+```
+
+![](README_files/figure-commonmark/unnamed-chunk-5-1.png)
+
+``` r
+# diverging
+linuxcolors_palettes$diverging |> color() |> plot()
+```
+
+![](README_files/figure-commonmark/unnamed-chunk-6-1.png)
+
+``` r
+# sequential_green
+linuxcolors_palettes$sequential_green |> color() |> plot()
+```
+
+![](README_files/figure-commonmark/unnamed-chunk-7-1.png)
+
+``` r
+# colorblind_strict
+linuxcolors_palettes$colorblind_strict |> color() |> plot()
+```
+
+![](README_files/figure-commonmark/unnamed-chunk-8-1.png)
+
+``` r
+linuxcolors_palettes$colorblind_strict |> color() |> check_color_blindness()
+```
+
+![](README_files/figure-commonmark/unnamed-chunk-8-2.png)
+
+``` r
+# neon
+linuxcolors_palettes$neon |> color() |> plot()
+```
+
+![](README_files/figure-commonmark/unnamed-chunk-9-1.png)
+
 ## Usage
 
 ``` r
