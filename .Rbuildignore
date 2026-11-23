@@ -1,3 +1,11 @@
 ^linuxcolors\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
+^\.Rhistory$
+^README\.qmd$
+^README_files$
+^data-raw$
+^dev$
+^tmp$
+^inst/init$
+^inst/antigravity$
