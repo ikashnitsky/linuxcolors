@@ -1,0 +1,16 @@
+{
+  "permission": {
+    "bash": {
+      "git remote *": "allow",
+      "echo *": "allow",
+      "git log *": "allow",
+      "git diff *": "allow",
+      "git fetch *": "allow",
+      "git show *": "allow",
+      "mkdir *": "allow",
+      "git archive *": "allow",
+      "tar *": "allow",
+      "ls *": "allow"
+    }
+  }
+}
