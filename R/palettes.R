@@ -1,102 +1,175 @@
-#' Linux Distribution Color Palettes
+#' Brand colours of Linux distributions
 #'
-#' A comprehensive collection of color palettes extracted from the visual
-#' identities of popular Linux distributions. Designed for mathematically sound
-#' and aesthetically pleasing data visualization.
+#' A named vector with the primary (and some secondary) identity colours of
+#' popular Linux distributions. These are the raw ingredients of
+#' [linuxcolors_palettes]. Use them when you need a *specific* distro's colour,
+#' e.g. to colour a chart about the distros themselves.
 #'
+#' The values were compiled from public logos and brand material and are
+#' approximate; they are not endorsed by the respective projects.
+#'
+#' @format A named character vector of hex colours.
+#' @seealso [linuxcolors_palettes] for palettes designed for data visualisation.
+#' @examples
+#' linux_distro_colors[c("Ubuntu", "Arch Linux", "Fedora")]
+#' @export
+linux_distro_colors <- c(
+  "AlmaLinux" = "#1158AE",
+  "Alpine Linux" = "#0D597F",
+  "Arch Linux" = "#1793D1",
+  "CachyOS" = "#00D2CF",
+  "Debian" = "#A80030",
+  "Debian swirl" = "#D70A53",
+  "elementary OS" = "#64BAFF",
+  "EndeavourOS" = "#7B2FBE",
+  "Fedora" = "#0B57A4",
+  "Fedora blue" = "#51A2DA",
+  "Fedora classic" = "#3C6EB4",
+  "Fedora dark blue" = "#294172",
+  "Garuda Linux" = "#E84B4B",
+  "Gentoo" = "#54487A",
+  "Kali Linux" = "#367BF0",
+  "KDE Neon" = "#1D99F3",
+  "Linux Mint" = "#87CF3E",
+  "Manjaro" = "#34BE5B",
+  "MX Linux" = "#243365",
+  "NixOS" = "#5277C3",
+  "NixOS light" = "#7EBAE4",
+  "Nobara" = "#8E24AA",
+  "openSUSE" = "#73BA25",
+  "openSUSE jungle" = "#35B9AB",
+  "openSUSE pine" = "#173F4F",
+  "Pop!_OS" = "#FAA41A",
+  "Pop!_OS teal" = "#48B9C7",
+  "Raspberry Pi OS" = "#C51A4A",
+  "Red Hat" = "#EE0000",
+  "Rocky Linux" = "#10B981",
+  "SparkyLinux" = "#5C9A35",
+  "Ubuntu" = "#E95420",
+  "Ubuntu aubergine" = "#77216F",
+  "Ubuntu dark aubergine" = "#2C001E",
+  "Ubuntu warm grey" = "#AEA79F",
+  "Void Linux" = "#478061",
+  "Zorin OS" = "#15A6F0"
+)
+
+#' Colour palettes inspired by Linux distributions
+#'
+#' Palettes built from the identity colours of Linux distributions (see
+#' [linux_distro_colors]) and designed to follow the best practices of
+#' scientific colour use (Crameri, Shephard & Heron 2020): perceptually
+#' ordered and uniform, readable in greyscale, and friendly to people with
+#' colour-vision deficiency (CVD).
+#'
+#' ## Qualitative (for categories; never interpolated)
+#'
+#' * `main` (8 colours) -- the default. Pop!_OS, MX Linux, CachyOS, Debian,
+#'   Arch Linux, EndeavourOS, Void Linux and Ubuntu, chosen among the brand
+#'   colours of [linux_distro_colors] to maximise the worst-case CIEDE2000
+#'   distance under normal vision, deuteranopia, protanopia and tritanopia
+#'   (minimum 13.3; for comparison, the 8 Okabe-Ito colours without black
+#'   reach 6.4). Colours are
+#'   ordered so that the first *k* are as distinct as possible for every *k*.
+#' * `neon` (5 colours) -- bright colours (CIE L* >= 50) for dark backgrounds.
+#'
+#' ## Sequential (dark to light; CIE L* linear from 10 to 95)
+#'
+#' * `ubuntu` -- dark aubergine, aubergine, orange, amber, cream.
+#' * `arch` -- navy to ice blue through Arch Linux blue.
+#' * `mint` -- pine to pale lime through Manjaro and Linux Mint greens.
+#' * `distrohop` -- multi-hue (navy, blue, teal, green, amber), in the spirit
+#'   of *batlow* and *viridis*.
+#'
+#' ## Diverging (light centre; arms with mirrored L* from 96 to 25)
+#'
+#' * `fedora_redhat` -- Fedora blue to Red Hat red.
+#' * `pop` -- Pop!_OS teal to Pop!_OS amber.
+#' * `ubuntu_mint` -- Ubuntu aubergine to Linux Mint green.
+#'
+#' The sequential and diverging palettes are stored as 11 nodes and
+#' interpolated in the OKLab colour space; brand colours set their hue and
+#' chroma, while their lightness is re-computed to obey the rules above. The
+#' generating script is `data-raw/palettes.R` in the package sources.
+#'
+#' @format A named list of character vectors of hex colours. Use
+#'   [linux_palettes_info()] to see the type of each palette.
+#' @references Crameri, F., Shephard, G.E. & Heron, P.J. (2020). The misuse of
+#'   colour in science communication. *Nature Communications*, 11, 5444.
+#'   \doi{10.1038/s41467-020-19160-7}
+#' @seealso [linux_colors()] to extract colours, [scale_colour_linux()] for
+#'   ggplot2 scales, [show_linux_palettes()] to preview the palettes.
+#' @examples
+#' linuxcolors_palettes$main
+#' names(linuxcolors_palettes)
 #' @export
 linuxcolors_palettes <- list(
-  main = c(
-    "Fedora" = "#0B57A4",
-    "Ubuntu" = "#E95420",
-    "CachyOS" = "#00D2CF",
-    "EndeavourOS" = "#7B2FBE",
-    "Pop!_OS" = "#FAA41A",
-    "MX Linux" = "#243365",
-    "Debian" = "#A80030",
-    "Manjaro" = "#34BE5B"
+  # Qualitative ---------------------------------------------------------------
+  main = linux_distro_colors[c(
+    "Pop!_OS", "MX Linux", "CachyOS", "Debian",
+    "Arch Linux", "EndeavourOS", "Void Linux", "Ubuntu"
+  )],
+  neon = linux_distro_colors[c(
+    "Ubuntu", "NixOS", "CachyOS", "Linux Mint", "Fedora blue"
+  )],
+
+  # Sequential (generated by data-raw/palettes.R) ------------------------------
+  ubuntu = c(
+    "#37062C", "#4F0F4E", "#6B1C6A", "#8D2A71", "#B33765", "#D8464B",
+    "#F3601D", "#FC8A00", "#FFB035", "#FFD284", "#FEF0CD"
+  ),
+  arch = c(
+    "#0F1743", "#132866", "#143A89", "#0F51A7", "#006BBA", "#0187C8",
+    "#2C9EDE", "#57B4F9", "#8CC8FF", "#BADDFF", "#E4F2FF"
+  ),
+  mint = c(
+    "#001E2C", "#0E333A", "#244843", "#30604A", "#277B4D", "#00974B",
+    "#27B13F", "#68C633", "#9BD853", "#C4E88F", "#E9F6CE"
+  ),
+  distrohop = c(
+    "#0C1843", "#1D2866", "#2B3C86", "#2B589C", "#06799C", "#009785",
+    "#34B058", "#87C01A", "#D0C722", "#FED36C", "#FFF1BE"
   ),
 
-  additional = c(
-    "Garuda Linux" = "#E84B4B",
-    "Arch Linux" = "#1793D1",
-    "Linux Mint" = "#87CF3E",
-    "NixOS" = "#5277C3",
-    "openSUSE" = "#73BA25",
-    "Zorin OS" = "#15A6F0",
-    "Void Linux" = "#478061",
-    "KDE Neon" = "#1D99F3"
+  # Diverging (generated by data-raw/palettes.R) -------------------------------
+  fedora_redhat = c(
+    "#233A6A", "#245F98", "#3285C1", "#61ACE0", "#A7D1EF", "#F3F3F3",
+    "#FFBBAF", "#FF7E6D", "#F92419", "#BD0000", "#7E0000"
   ),
-
-  larger = c(
-    "Pop!_OS" = "#FAA41A",
-    "Fedora" = "#0B57A4",
-    "Linux Mint" = "#87CF3E",
-    "Ubuntu" = "#E95420",
-    "EndeavourOS" = "#7B2FBE",
-    "MX Linux" = "#243365",
-    "CachyOS" = "#00D2CF",
-    "Debian" = "#A80030",
-    "Arch Linux" = "#1793D1",
-    "openSUSE" = "#73BA25",
-    "Garuda Linux" = "#E84B4B",
-    "KDE Neon" = "#1D99F3"
+  pop = c(
+    "#03424A", "#006771", "#008D9B", "#40B4C2", "#9AD6DE", "#F3F3F3",
+    "#FEC073", "#E59300", "#B47000", "#874F00", "#5C3008"
   ),
-
-  max_paired = c(
-    "Pop!_OS" = "#FAA41A",
-    "Ubuntu" = "#E95420",
-    "Garuda Linux" = "#E84B4B",
-    "Debian" = "#A80030",
-    "NixOS" = "#5277C3",
-    "EndeavourOS" = "#7B2FBE",
-    "Zorin OS" = "#15A6F0",
-    "Arch Linux" = "#1793D1",
-    "elementary OS" = "#64BAFF",
-    "Fedora" = "#0B57A4",
-    "KDE Neon" = "#1D99F3",
-    "Kali Linux" = "#367BF0",
-    "AlmaLinux" = "#1158AE",
-    "MX Linux" = "#243365",
-    "CachyOS" = "#00D2CF",
-    "Rocky Linux" = "#10B981",
-    "Linux Mint" = "#87CF3E",
-    "Manjaro" = "#34BE5B",
-    "openSUSE" = "#73BA25",
-    "Void Linux" = "#478061"
-  ),
-
-  diverging = c(
-    "Debian" = "#A80030",
-    "Ubuntu" = "#E95420",
-    "Puppy Linux" = "#F3F3F3",
-    "CachyOS" = "#00D2CF",
-    "Arch Linux" = "#1793D1"
-  ),
-
-  sequential_green = c(
-    "Linux Mint" = "#87CF3E",
-    "openSUSE" = "#73BA25",
-    "SparkyLinux" = "#5C9A35",
-    "Manjaro" = "#34BE5B",
-    "Void Linux" = "#478061"
-  ),
-
-  colorblind_strict = c(
-    "Pop!_OS" = "#FAA41A",
-    "Ubuntu" = "#E95420",
-    "Fedora" = "#0B57A4",
-    "EndeavourOS" = "#7B2FBE",
-    "CachyOS" = "#00D2CF",
-    "MX Linux" = "#243365"
-  ),
-
-  neon = c(
-    "Garuda Linux" = "#E84B4B",
-    "CachyOS" = "#00D2CF",
-    "KDE Neon" = "#1D99F3",
-    "Zorin OS" = "#15A6F0",
-    "Linux Mint" = "#87CF3E",
-    "Nobara" = "#8E24AA"
+  ubuntu_mint = c(
+    "#68195E", "#92378D", "#B660B2", "#D18ECE", "#E5C0E3", "#F3F3F3",
+    "#A3DB74", "#6DB800", "#518F00", "#366900", "#24431A"
   )
+)
+
+palette_types <- c(
+  main = "qualitative", neon = "qualitative",
+  ubuntu = "sequential", arch = "sequential", mint = "sequential",
+  distrohop = "sequential",
+  fedora_redhat = "diverging", pop = "diverging", ubuntu_mint = "diverging"
+)
+
+palette_descriptions <- c(
+  main = "Default; 8 CVD-robust distro colours, best-first order",
+  neon = "Bright colours for dark backgrounds",
+  ubuntu = "Aubergine to orange to cream",
+  arch = "Navy to Arch blue to ice",
+  mint = "Pine to Mint green to pale lime",
+  distrohop = "Multi-hue: navy, teal, green, amber",
+  fedora_redhat = "Fedora blue <-> Red Hat red",
+  pop = "Pop!_OS teal <-> Pop!_OS amber",
+  ubuntu_mint = "Ubuntu aubergine <-> Linux Mint green"
+)
+
+# Palettes of linuxcolors <= 0.0.0.9000 and their closest replacements
+legacy_palettes <- c(
+  additional = "main",
+  larger = "main",
+  max_paired = "main",
+  colorblind_strict = "main",
+  diverging = "fedora_redhat",
+  sequential_green = "mint"
 )
